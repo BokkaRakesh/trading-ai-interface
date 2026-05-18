@@ -42,61 +42,61 @@ export function ChartsPage() {
   const { chartData, currentPrice, priceChange, priceChangePercent } = useTradingStore();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Page Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold text-white tracking-tight">Advanced Charts</h1>
-          <p className="text-gray-400 text-sm mt-1">Technical analysis and market data</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Advanced Charts</h1>
+          <p className="text-gray-400 text-xs sm:text-sm mt-1">Technical analysis and market data</p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto">
           <Button
             variant={chartType === 'area' ? 'primary' : 'secondary'}
             size="sm"
             onClick={() => setChartType('area')}
           >
-            <Activity className="w-4 h-4 mr-1" />
-            Area
+            <Activity className="w-4 h-4 sm:mr-1" />
+            <span className="hidden sm:inline">Area</span>
           </Button>
           <Button
             variant={chartType === 'line' ? 'primary' : 'secondary'}
             size="sm"
             onClick={() => setChartType('line')}
           >
-            <LineChart className="w-4 h-4 mr-1" />
-            Line
+            <LineChart className="w-4 h-4 sm:mr-1" />
+            <span className="hidden sm:inline">Line</span>
           </Button>
           <Button
             variant={chartType === 'candlestick' ? 'primary' : 'secondary'}
             size="sm"
             onClick={() => setChartType('candlestick')}
           >
-            <CandlestickChart className="w-4 h-4 mr-1" />
-            Candle
+            <CandlestickChart className="w-4 h-4 sm:mr-1" />
+            <span className="hidden sm:inline">Candle</span>
           </Button>
         </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-6">
         {/* Symbol List */}
-        <div className="col-span-3">
+        <div className="md:col-span-1 lg:col-span-3 order-2 md:order-1">
           <Card className="h-full">
-            <div className="p-4 border-b border-gray-700">
+            <div className="p-3 sm:p-4 border-b border-gray-700">
               <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                 <Layers className="w-4 h-4 text-blue-500" />
                 Watchlist
               </h3>
             </div>
-            <div className="p-2">
+            <div className="p-2 flex md:block gap-2 overflow-x-auto md:overflow-visible">
               {symbols.map((symbol) => (
                 <button
                   key={symbol.name}
                   onClick={() => setSelectedSymbol(symbol.name)}
                   className={cn(
-                    'w-full p-3 rounded-lg text-left transition-colors mb-1',
+                    'flex-shrink-0 md:w-full p-2 sm:p-3 rounded-lg text-left transition-colors md:mb-1',
                     selectedSymbol === symbol.name
                       ? 'bg-blue-600/20 border border-blue-600/50'
-                      : 'hover:bg-gray-800'
+                      : 'hover:bg-gray-800 border border-transparent'
                   )}
                 >
                   <div className="flex justify-between items-center">
@@ -116,14 +116,14 @@ export function ChartsPage() {
         </div>
 
         {/* Main Chart */}
-        <div className="col-span-6">
+        <div className="md:col-span-1 lg:col-span-6 order-1 md:order-2">
           <Card className="h-full">
-            <div className="p-4 border-b border-gray-700">
-              <div className="flex items-center justify-between">
+            <div className="p-3 sm:p-4 border-b border-gray-700">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                 <div>
-                  <h3 className="text-lg font-bold text-white">{selectedSymbol}</h3>
-                  <div className="flex items-center gap-3 mt-1">
-                    <span className="text-2xl font-bold text-white font-mono">
+                  <h3 className="text-base sm:text-lg font-bold text-white">{selectedSymbol}</h3>
+                  <div className="flex items-center gap-2 sm:gap-3 mt-1">
+                    <span className="text-lg sm:text-2xl font-bold text-white font-mono">
                       {formatCurrency(currentPrice)}
                     </span>
                     <Badge variant={priceChange >= 0 ? 'success' : 'danger'}>
@@ -132,11 +132,11 @@ export function ChartsPage() {
                     </Badge>
                   </div>
                 </div>
-                <div className="flex gap-1">
+                <div className="flex gap-1 overflow-x-auto">
                   {['1D', '1W', '1M', '3M', '1Y'].map((tf) => (
                     <button
                       key={tf}
-                      className="px-3 py-1 text-xs font-medium text-gray-400 hover:text-white hover:bg-gray-800 rounded transition-colors"
+                      className="px-2 sm:px-3 py-1 text-xs font-medium text-gray-400 hover:text-white hover:bg-gray-800 rounded transition-colors flex-shrink-0"
                     >
                       {tf}
                     </button>
@@ -144,22 +144,22 @@ export function ChartsPage() {
                 </div>
               </div>
             </div>
-            <div className="p-4">
+            <div className="p-2 sm:p-4 h-[250px] sm:h-[300px] md:h-auto">
               <PriceChart data={chartData} type={chartType === 'candlestick' ? 'line' : chartType} />
             </div>
           </Card>
         </div>
 
         {/* Indicators Panel */}
-        <div className="col-span-3">
+        <div className="md:col-span-2 lg:col-span-3 order-3">
           <Card className="h-full">
-            <div className="p-4 border-b border-gray-700">
+            <div className="p-3 sm:p-4 border-b border-gray-700">
               <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                 <BarChart3 className="w-4 h-4 text-blue-500" />
                 Technical Indicators
               </h3>
             </div>
-            <div className="p-4 space-y-4">
+            <div className="p-3 sm:p-4 grid grid-cols-2 md:grid-cols-1 gap-3 sm:gap-4">
               {indicators.map((indicator) => (
                 <div key={indicator.name} className="flex items-center justify-between">
                   <span className="text-gray-400 text-sm">{indicator.name}</span>

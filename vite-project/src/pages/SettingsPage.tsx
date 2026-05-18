@@ -65,31 +65,31 @@ export function SettingsPage() {
   const [twoFactor, setTwoFactor] = useState(false);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Settings</h1>
-        <p className="text-gray-400 text-sm mt-1">Manage your account and preferences</p>
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Settings</h1>
+        <p className="text-gray-400 text-xs sm:text-sm mt-1">Manage your account and preferences</p>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
-        {/* Settings Navigation */}
-        <div className="col-span-3">
+      <div className="flex flex-col lg:grid lg:grid-cols-12 gap-4 sm:gap-6">
+        {/* Settings Navigation - Horizontal scroll on mobile */}
+        <div className="lg:col-span-3">
           <Card>
-            <div className="p-2">
+            <div className="p-2 flex lg:block gap-1 overflow-x-auto lg:overflow-visible">
               {sections.map((section) => (
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
                   className={cn(
-                    'w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
+                    'flex-shrink-0 flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2 sm:py-3 rounded-lg transition-colors lg:w-full',
                     activeSection === section.id
                       ? 'bg-blue-600 text-white'
                       : 'text-gray-400 hover:text-white hover:bg-gray-800'
                   )}
                 >
-                  <section.icon className="w-5 h-5" />
-                  <span className="text-sm font-medium">{section.label}</span>
+                  <section.icon className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-xs sm:text-sm font-medium whitespace-nowrap">{section.label}</span>
                 </button>
               ))}
             </div>
@@ -97,7 +97,7 @@ export function SettingsPage() {
         </div>
 
         {/* Settings Content */}
-        <div className="col-span-9">
+        <div className="lg:col-span-9">
           {activeSection === 'profile' && (
             <Card>
               <div className="p-4 border-b border-gray-700">

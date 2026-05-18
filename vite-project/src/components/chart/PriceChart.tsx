@@ -40,7 +40,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 export function PriceChart({ data, type = 'area' }: PriceChartProps) {
   if (data.length === 0) {
     return (
-      <div className="h-80 flex items-center justify-center text-gray-500">
+      <div className="h-full flex items-center justify-center text-gray-500">
         No data available
       </div>
     );
@@ -56,8 +56,8 @@ export function PriceChart({ data, type = 'area' }: PriceChartProps) {
 
   if (type === 'line') {
     return (
-      <ResponsiveContainer width="100%" height={320}>
-        <LineChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={data} margin={{ top: 5, right: 5, left: -10, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
           <XAxis 
             dataKey="date" 
@@ -87,8 +87,8 @@ export function PriceChart({ data, type = 'area' }: PriceChartProps) {
   }
 
   return (
-    <ResponsiveContainer width="100%" height={320}>
-      <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+    <ResponsiveContainer width="100%" height="100%">
+      <AreaChart data={data} margin={{ top: 5, right: 5, left: -10, bottom: 0 }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
             <stop offset="5%" stopColor={chartColor} stopOpacity={0.3} />

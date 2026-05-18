@@ -24,12 +24,12 @@ export function ChatInput({ onSend, disabled = false }: ChatInputProps) {
   };
 
   return (
-    <div className="p-4 border-t border-gray-700">
+    <div className="p-2 sm:p-4 border-t border-gray-700 flex-shrink-0">
       <div className="flex gap-2">
         <Input
           value={message}
           onChange={setMessage}
-          placeholder="Ask about market trends, trading insights..."
+          placeholder="Ask about market trends..."
           onSubmit={handleSubmit}
           disabled={disabled}
           className="flex-1"
@@ -37,9 +37,9 @@ export function ChatInput({ onSend, disabled = false }: ChatInputProps) {
         <Button
           onClick={handleSubmit}
           disabled={disabled || !message.trim()}
-          className="px-4"
+          className="px-3 sm:px-4"
         >
-          <Send className="w-5 h-5" />
+          <Send className="w-4 h-4 sm:w-5 sm:h-5" />
         </Button>
       </div>
     </div>

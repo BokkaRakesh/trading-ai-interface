@@ -29,18 +29,18 @@ export function TradingDashboard() {
   }, [refreshData]);
 
   return (
-    <Card className="flex flex-col h-full">
+    <Card className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
+      <div className="flex items-center justify-between px-3 sm:px-4 py-2 sm:py-3 border-b border-gray-700 flex-shrink-0">
         <div className="flex items-center gap-2">
-          <BarChart3 className="w-5 h-5 text-blue-500" />
-          <h2 className="text-lg font-semibold text-white">Trading Dashboard</h2>
+          <BarChart3 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+          <h2 className="text-sm sm:text-lg font-semibold text-white">Trading Dashboard</h2>
         </div>
         <TimeframeSelector selected={timeframe} onSelect={setTimeframe} />
       </div>
 
       {/* Price Info */}
-      <div className="px-4 py-4 border-b border-gray-700">
+      <div className="px-3 sm:px-4 py-3 sm:py-4 border-b border-gray-700 flex-shrink-0">
         <PriceDisplay
           symbol={symbol}
           price={currentPrice}
@@ -50,7 +50,7 @@ export function TradingDashboard() {
       </div>
 
       {/* Chart */}
-      <div className="flex-1 px-4 py-4">
+      <div className="flex-1 min-h-0 px-3 sm:px-4 py-3 sm:py-4 h-full">
         <PriceChart data={chartData} />
       </div>
     </Card>

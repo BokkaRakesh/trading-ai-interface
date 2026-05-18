@@ -9,8 +9,7 @@ import {
   PieChart,
   ArrowUpRight,
   ArrowDownRight,
-  DollarSign,
-  Percent
+  DollarSign
 } from 'lucide-react';
 import { Card, Badge } from '../components/ui';
 import { formatCurrency, formatPercent, cn } from '../utils/helpers';
@@ -37,43 +36,43 @@ const totalChange = 3.45; // Mock total change
 
 export function PortfolioPage() {
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Portfolio</h1>
-        <p className="text-gray-400 text-sm mt-1">Track and manage your assets</p>
+        <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">Portfolio</h1>
+        <p className="text-gray-400 text-xs sm:text-sm mt-1">Track and manage your assets</p>
       </div>
 
       {/* Portfolio Summary Cards */}
-      <div className="grid grid-cols-4 gap-4">
-        <Card className="p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
-              <Wallet className="w-5 h-5 text-blue-500" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        <Card className="p-3 sm:p-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-600/20 flex items-center justify-center">
+              <Wallet className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
             </div>
             <div>
-              <p className="text-xs text-gray-400 font-medium">Total Value</p>
-              <p className="text-xl font-bold text-white font-mono">{formatCurrency(totalValue)}</p>
+              <p className="text-[10px] sm:text-xs text-gray-400 font-medium">Total Value</p>
+              <p className="text-sm sm:text-xl font-bold text-white font-mono">{formatCurrency(totalValue)}</p>
             </div>
           </div>
         </Card>
 
-        <Card className="p-4">
-          <div className="flex items-center gap-3">
+        <Card className="p-3 sm:p-4">
+          <div className="flex items-center gap-2 sm:gap-3">
             <div className={cn(
-              'w-10 h-10 rounded-lg flex items-center justify-center',
+              'w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center',
               totalChange >= 0 ? 'bg-green-600/20' : 'bg-red-600/20'
             )}>
               {totalChange >= 0 ? (
-                <TrendingUp className="w-5 h-5 text-green-500" />
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
               ) : (
-                <TrendingDown className="w-5 h-5 text-red-500" />
+                <TrendingDown className="w-4 h-4 sm:w-5 sm:h-5 text-red-500" />
               )}
             </div>
             <div>
-              <p className="text-xs text-gray-400 font-medium">24h Change</p>
+              <p className="text-[10px] sm:text-xs text-gray-400 font-medium">24h Change</p>
               <p className={cn(
-                'text-xl font-bold font-mono',
+                'text-sm sm:text-xl font-bold font-mono',
                 totalChange >= 0 ? 'text-green-400' : 'text-red-400'
               )}>
                 {formatPercent(totalChange)}
@@ -82,87 +81,87 @@ export function PortfolioPage() {
           </div>
         </Card>
 
-        <Card className="p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-purple-600/20 flex items-center justify-center">
-              <PieChart className="w-5 h-5 text-purple-500" />
+        <Card className="p-3 sm:p-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-purple-600/20 flex items-center justify-center">
+              <PieChart className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500" />
             </div>
             <div>
-              <p className="text-xs text-gray-400 font-medium">Assets</p>
-              <p className="text-xl font-bold text-white">{portfolioAssets.length}</p>
+              <p className="text-[10px] sm:text-xs text-gray-400 font-medium">Assets</p>
+              <p className="text-sm sm:text-xl font-bold text-white">{portfolioAssets.length}</p>
             </div>
           </div>
         </Card>
 
-        <Card className="p-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-yellow-600/20 flex items-center justify-center">
-              <DollarSign className="w-5 h-5 text-yellow-500" />
+        <Card className="p-3 sm:p-4">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-yellow-600/20 flex items-center justify-center">
+              <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
             </div>
             <div>
-              <p className="text-xs text-gray-400 font-medium">Best Performer</p>
-              <p className="text-xl font-bold text-green-400">SOL +8.92%</p>
+              <p className="text-[10px] sm:text-xs text-gray-400 font-medium">Best Performer</p>
+              <p className="text-sm sm:text-xl font-bold text-green-400">SOL +8.92%</p>
             </div>
           </div>
         </Card>
       </div>
 
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6">
         {/* Assets Table */}
-        <div className="col-span-8">
+        <div className="lg:col-span-8">
           <Card>
-            <div className="p-4 border-b border-gray-700">
+            <div className="p-3 sm:p-4 border-b border-gray-700">
               <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                 <Wallet className="w-4 h-4 text-blue-500" />
                 Your Assets
               </h3>
             </div>
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-[500px]">
                 <thead>
                   <tr className="border-b border-gray-700">
-                    <th className="text-left p-4 text-xs font-semibold text-gray-400 uppercase">Asset</th>
-                    <th className="text-right p-4 text-xs font-semibold text-gray-400 uppercase">Holdings</th>
-                    <th className="text-right p-4 text-xs font-semibold text-gray-400 uppercase">Value</th>
-                    <th className="text-right p-4 text-xs font-semibold text-gray-400 uppercase">24h Change</th>
-                    <th className="text-right p-4 text-xs font-semibold text-gray-400 uppercase">Allocation</th>
+                    <th className="text-left p-2 sm:p-4 text-[10px] sm:text-xs font-semibold text-gray-400 uppercase">Asset</th>
+                    <th className="text-right p-2 sm:p-4 text-[10px] sm:text-xs font-semibold text-gray-400 uppercase hidden sm:table-cell">Holdings</th>
+                    <th className="text-right p-2 sm:p-4 text-[10px] sm:text-xs font-semibold text-gray-400 uppercase">Value</th>
+                    <th className="text-right p-2 sm:p-4 text-[10px] sm:text-xs font-semibold text-gray-400 uppercase">24h</th>
+                    <th className="text-right p-2 sm:p-4 text-[10px] sm:text-xs font-semibold text-gray-400 uppercase hidden md:table-cell">Allocation</th>
                   </tr>
                 </thead>
                 <tbody>
                   {portfolioAssets.map((asset) => (
                     <tr key={asset.symbol} className="border-b border-gray-800 hover:bg-gray-800/50 transition-colors">
-                      <td className="p-4">
-                        <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-sm font-bold text-white">
+                      <td className="p-2 sm:p-4">
+                        <div className="flex items-center gap-2 sm:gap-3">
+                          <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs sm:text-sm font-bold text-white">
                             {asset.symbol.charAt(0)}
                           </div>
                           <div>
-                            <p className="text-white font-medium">{asset.symbol}</p>
-                            <p className="text-xs text-gray-500">{asset.name}</p>
+                            <p className="text-white text-sm font-medium">{asset.symbol}</p>
+                            <p className="text-[10px] sm:text-xs text-gray-500 hidden sm:block">{asset.name}</p>
                           </div>
                         </div>
                       </td>
-                      <td className="p-4 text-right">
-                        <span className="text-white font-mono">{asset.amount.toLocaleString()}</span>
+                      <td className="p-2 sm:p-4 text-right hidden sm:table-cell">
+                        <span className="text-white text-sm font-mono">{asset.amount.toLocaleString()}</span>
                       </td>
-                      <td className="p-4 text-right">
-                        <span className="text-white font-mono">{formatCurrency(asset.value)}</span>
+                      <td className="p-2 sm:p-4 text-right">
+                        <span className="text-white text-sm font-mono">{formatCurrency(asset.value)}</span>
                       </td>
-                      <td className="p-4 text-right">
+                      <td className="p-2 sm:p-4 text-right">
                         <Badge variant={asset.change >= 0 ? 'success' : 'danger'}>
-                          {asset.change >= 0 ? <ArrowUpRight className="w-3 h-3 mr-1" /> : <ArrowDownRight className="w-3 h-3 mr-1" />}
-                          {formatPercent(asset.change)}
+                          {asset.change >= 0 ? <ArrowUpRight className="w-3 h-3 sm:mr-1" /> : <ArrowDownRight className="w-3 h-3 sm:mr-1" />}
+                          <span className="hidden sm:inline">{formatPercent(asset.change)}</span>
                         </Badge>
                       </td>
-                      <td className="p-4 text-right">
+                      <td className="p-2 sm:p-4 text-right hidden md:table-cell">
                         <div className="flex items-center justify-end gap-2">
-                          <div className="w-16 h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                          <div className="w-12 sm:w-16 h-1.5 bg-gray-700 rounded-full overflow-hidden">
                             <div 
                               className="h-full bg-blue-500 rounded-full"
                               style={{ width: `${asset.allocation}%` }}
                             />
                           </div>
-                          <span className="text-gray-400 text-sm font-mono w-10">{asset.allocation}%</span>
+                          <span className="text-gray-400 text-xs sm:text-sm font-mono w-8 sm:w-10">{asset.allocation}%</span>
                         </div>
                       </td>
                     </tr>
@@ -174,9 +173,9 @@ export function PortfolioPage() {
         </div>
 
         {/* Recent Transactions */}
-        <div className="col-span-4">
+        <div className="lg:col-span-4">
           <Card className="h-full">
-            <div className="p-4 border-b border-gray-700">
+            <div className="p-3 sm:p-4 border-b border-gray-700">
               <h3 className="text-sm font-semibold text-white flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-blue-500" />
                 Recent Transactions
@@ -184,34 +183,34 @@ export function PortfolioPage() {
             </div>
             <div className="p-2">
               {recentTransactions.map((tx, i) => (
-                <div key={i} className="p-3 hover:bg-gray-800 rounded-lg transition-colors">
+                <div key={i} className="p-2 sm:p-3 hover:bg-gray-800 rounded-lg transition-colors">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <div className={cn(
-                        'w-8 h-8 rounded-full flex items-center justify-center',
+                        'w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center flex-shrink-0',
                         tx.type === 'buy' ? 'bg-green-600/20' : 'bg-red-600/20'
                       )}>
                         {tx.type === 'buy' ? (
-                          <ArrowDownRight className="w-4 h-4 text-green-500" />
+                          <ArrowDownRight className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" />
                         ) : (
-                          <ArrowUpRight className="w-4 h-4 text-red-500" />
+                          <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 text-red-500" />
                         )}
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">
+                        <p className="text-white text-xs sm:text-sm font-medium">
                           {tx.type === 'buy' ? 'Bought' : 'Sold'} {tx.symbol}
                         </p>
-                        <p className="text-xs text-gray-500">{tx.date}</p>
+                        <p className="text-[10px] sm:text-xs text-gray-500">{tx.date}</p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className={cn(
-                        'text-sm font-mono font-medium',
+                        'text-xs sm:text-sm font-mono font-medium',
                         tx.type === 'buy' ? 'text-green-400' : 'text-red-400'
                       )}>
                         {tx.type === 'buy' ? '+' : '-'}{tx.amount} {tx.symbol}
                       </p>
-                      <p className="text-xs text-gray-500">{formatCurrency(tx.value)}</p>
+                      <p className="text-[10px] sm:text-xs text-gray-500">{formatCurrency(tx.value)}</p>
                     </div>
                   </div>
                 </div>

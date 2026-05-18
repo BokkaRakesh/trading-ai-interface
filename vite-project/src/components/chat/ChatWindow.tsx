@@ -13,11 +13,11 @@ export function ChatWindow() {
   const { messages, isLoading, sendMessage } = useChatStore();
 
   return (
-    <Card className="flex flex-col h-full">
+    <Card className="flex flex-col h-full overflow-hidden">
       {/* Header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-gray-700">
-        <MessageCircle className="w-5 h-5 text-blue-500" />
-        <h2 className="text-lg font-semibold text-white">AI Trading Assistant</h2>
+      <div className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 border-b border-gray-700 flex-shrink-0">
+        <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+        <h2 className="text-base sm:text-lg font-semibold text-white">AI Trading Assistant</h2>
       </div>
 
       {/* Messages */}
