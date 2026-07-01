@@ -1,53 +1,16 @@
-## 🚀 Features
+# TradingAI — Smart Trading & Portfolio Assistant
 
-### 📊 Trading Dashboard
-- Interactive financial charts (line / candlestick)
-- Simulated market data visualization
-- Timeframe switching (1D, 1W, 1M - mock)
-- Smooth and responsive chart rendering
+Full-stack personal finance dashboard for Indian retail investors.
 
----
+See **[vite-project/README.md](vite-project/README.md)** for complete documentation — features, tech stack, project structure, API reference, environment variables, and setup instructions.
 
-### 💬 AI Chat Interface
-- ChatGPT-like conversational UI
-- User and assistant message bubbles
-- Real-time simulated responses
-- Auto-scroll chat behavior
+## Quick Start
 
----
-
-### 🧠 AI Simulation (Frontend Only)
-- Mock trading insights and responses
-- Predefined logic for trend-based replies
-- Designed for future LLM integration
-
----
-
-### 🎨 Modern UI/UX
-- Clean and minimal design (Tailwind CSS)
-- Responsive layout (mobile + desktop)
-- Smooth user interactions
-- Component-based architecture
-
----
-
-### ⚙️ State Management
-- Local state using React hooks / Zustand
-- Real-time UI updates
-- Modular and scalable structure
-
----
-
-### 🧩 Reusable Components
-- Chat window
-- Message bubbles
-- Input box
-- Chart container
-- Sidebar (optional)
-
----
-
-### 🔮 Future Enhancements
+```bash
+cd vite-project
+npm install
+npm run dev          # http://localhost:5174
+```
 - Real-time trading APIs (Binance, Alpha Vantage)
 - AI integration (OpenAI / Azure OpenAI)
 - Portfolio tracking
