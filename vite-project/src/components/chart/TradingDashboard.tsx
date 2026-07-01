@@ -50,7 +50,7 @@ export function TradingDashboard() {
       </div>
 
       {/* Chart */}
-      <div className="flex-1 min-h-0 px-3 sm:px-4 py-3 sm:py-4 h-full">
+      <div className="flex-1 min-h-0 px-3 sm:px-4 py-3 sm:py-4 h-full" style={{ minWidth: 0 }}>
         <PriceChart data={chartData} />
       </div>
     </Card>

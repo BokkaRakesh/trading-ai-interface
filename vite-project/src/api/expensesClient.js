@@ -18,7 +18,7 @@ const CATEGORY_BLUEPRINTS = [
     count: 8,
     min: 3000,
     max: 10000,
-    merchants: ['BOKKA RAMULAMMA', 'BOKKA ANITHA', 'Family Emergency'],
+    merchants: ['BOKKA RAMULAMMA DUMMY', 'BOKKA ANITHA DUMMY', 'Family Emergency'],
     descriptions: ['Family support transfer', 'Monthly family assistance', 'Medical support for family'],
   },
   {

@@ -14,6 +14,7 @@ import {
   Area,
   AreaChart,
 } from 'recharts';
+import { useEffect, useState } from 'react';
 import type { ChartDataPoint } from '../../types';
 import { formatCurrency } from '../../utils/helpers';
 
@@ -38,10 +39,13 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 };
 
 export function PriceChart({ data, type = 'area' }: PriceChartProps) {
-  if (data.length === 0) {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!mounted || data.length === 0) {
     return (
       <div className="h-full flex items-center justify-center text-gray-500">
-        No data available
+        {data.length === 0 ? 'No data available' : ''}
       </div>
     );
   }
@@ -56,7 +60,8 @@ export function PriceChart({ data, type = 'area' }: PriceChartProps) {
 
   if (type === 'line') {
     return (
-      <ResponsiveContainer width="100%" height="100%">
+      <div style={{ width: '100%', minWidth: 0 }}>
+        <ResponsiveContainer width="100%" height={280} initialDimension={{ width: 1, height: 280 }}>
         <LineChart data={data} margin={{ top: 5, right: 5, left: -10, bottom: 0 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
           <XAxis 
@@ -82,12 +87,14 @@ export function PriceChart({ data, type = 'area' }: PriceChartProps) {
             activeDot={{ r: 4, fill: chartColor }}
           />
         </LineChart>
-      </ResponsiveContainer>
+        </ResponsiveContainer>
+      </div>
     );
   }
 
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <div style={{ width: '100%', minWidth: 0 }}>
+      <ResponsiveContainer width="100%" height={280} initialDimension={{ width: 1, height: 280 }}>
       <AreaChart data={data} margin={{ top: 5, right: 5, left: -10, bottom: 0 }}>
         <defs>
           <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
@@ -119,6 +126,7 @@ export function PriceChart({ data, type = 'area' }: PriceChartProps) {
           activeDot={{ r: 4, fill: chartColor }}
         />
       </AreaChart>
-    </ResponsiveContainer>
+      </ResponsiveContainer>
+    </div>
   );
 }
