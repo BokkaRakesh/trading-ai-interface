@@ -4,7 +4,7 @@
 
 import { create } from 'zustand';
 
-export type PageType = 'dashboard' | 'charts' | 'chat' | 'portfolio' | 'settings';
+export type PageType = 'dashboard' | 'charts' | 'chat' | 'portfolio' | 'expenses' | 'settings';
 
 interface UIStore {
   sidebarOpen: boolean;

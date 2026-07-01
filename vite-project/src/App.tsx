@@ -9,6 +9,7 @@ import {
   ChartsPage, 
   ChatPage, 
   PortfolioPage, 
+  ExpensesPage,
   SettingsPage 
 } from './pages';
 import { useUIStore } from './stores';
@@ -26,6 +27,8 @@ function App() {
         return <ChatPage />;
       case 'portfolio':
         return <PortfolioPage />;
+      case 'expenses':
+        return <ExpensesPage />;
       case 'settings':
         return <SettingsPage />;
       default:

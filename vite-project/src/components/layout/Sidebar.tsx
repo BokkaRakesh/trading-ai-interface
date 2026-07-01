@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Wallet,
+  ReceiptText,
   X
 } from 'lucide-react';
 import { useUIStore, type PageType } from '../../stores/uiStore';
@@ -27,6 +28,7 @@ const navItems: NavItem[] = [
   { icon: BarChart3, label: 'Charts', page: 'charts' },
   { icon: MessageCircle, label: 'AI Chat', page: 'chat' },
   { icon: Wallet, label: 'Portfolio', page: 'portfolio' },
+  { icon: ReceiptText, label: 'Expenses', page: 'expenses' },
   { icon: Settings, label: 'Settings', page: 'settings' },
 ];
 
