@@ -1,12 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { RefreshCw, SlidersHorizontal } from 'lucide-react';
+import { Lightbulb, RefreshCw, SlidersHorizontal } from 'lucide-react';
 import SummaryStats from './SummaryStats';
 import CategoryChart from './CategoryChart';
 import TransactionsList from './TransactionsList';
 import UploadCard from './UploadCard';
 import TimeFilter from './TimeFilter';
 import expensesClient from '../api/expensesClient';
+import { useUIStore } from '../stores/uiStore';
 
 const PAGE_SIZE = 20;
 const ALL_CATEGORIES = 'All Categories';
@@ -67,6 +68,8 @@ export default function ExpensesTab() {
   const [summary, setSummary] = useState(null);
   const [activeTimeFilter, setActiveTimeFilter] = useState('lastMonth');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const setCurrentPage_ui = useUIStore((s) => s.setCurrentPage);
 
   const offset = (currentPage - 1) * PAGE_SIZE;
 
@@ -194,6 +197,31 @@ export default function ExpensesTab() {
         onDelete={handleDeleteTransaction}
         onCategoryReview={handleCategoryReview}
       />
+
+      {/* Invest Smarter CTA */}
+      {summary && summary.totalSpent > 0 && (
+        <div className="rounded-2xl bg-gradient-to-r from-cyan-900/40 to-emerald-900/30 border border-cyan-700/40 p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <div className="w-9 h-9 rounded-xl bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+              <Lightbulb className="w-5 h-5 text-cyan-400" />
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-white">Ready to invest your savings?</p>
+              <p className="text-xs text-gray-400 mt-0.5">
+                See which expenses can be reduced and get a personalised SIP / ETF / stock plan.
+              </p>
+            </div>
+          </div>
+          <button
+            type="button"
+            onClick={() => setCurrentPage_ui('portfolio')}
+            className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold transition-colors"
+          >
+            <Lightbulb className="w-4 h-4" />
+            Invest Smarter
+          </button>
+        </div>
+      )}
     </section>
   );
 }
