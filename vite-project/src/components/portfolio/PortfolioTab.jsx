@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
-import { Plus, Upload, RefreshCw, AlertTriangle } from 'lucide-react';
+import { Plus, Upload, RefreshCw, AlertTriangle, Sparkles } from 'lucide-react';
+import AddWithAI from '../../features/intake/AddWithAI';
 import PortfolioHeader from './PortfolioHeader';
 import AllocationTable from './AllocationTable';
 import AssetList from './AssetList';
@@ -7,6 +8,7 @@ import PerformanceChart from './PerformanceChart';
 import TopPerformers from './TopPerformers';
 import { AddAssetModal } from '../AssetForms';
 import { useMockPortfolio } from '../../services/mockPortfolioData';
+import { usePortfolioAssetsStore } from '../../stores/portfolioAssetsStore';
 
 /**
  * PortfolioTab
@@ -17,6 +19,7 @@ import { useMockPortfolio } from '../../services/mockPortfolioData';
  */
 export default function PortfolioTab({ householdId = 'household_rakesh', onAssetClick }) {
   const [showAddModal, setShowAddModal] = useState(false);
+  const [showAddWithAI, setShowAddWithAI] = useState(false);
   const [refreshTick, setRefreshTick] = useState(0);
 
   // Use mock data until the API is live.
@@ -27,8 +30,8 @@ export default function PortfolioTab({ householdId = 'household_rakesh', onAsset
 
   function handleDelete(assetId) {
     if (!window.confirm('Delete this asset? This action cannot be undone.')) return;
-    // TODO: call portfolioApi.deleteAsset(assetId).then(refresh)
-    alert(`Asset ${assetId} would be deleted (API not connected yet).`);
+    usePortfolioAssetsStore.getState().removeAsset(assetId);
+    refresh();
   }
 
   return (
@@ -61,6 +64,16 @@ export default function PortfolioTab({ householdId = 'household_rakesh', onAsset
           >
             <Upload className="w-3.5 h-3.5" />
             Import Statement
+          </button>
+          <button
+            type="button"
+            onClick={() => setShowAddWithAI(true)}
+            className="flex items-center gap-1.5 px-4 py-1.5 rounded-lg text-sm font-medium
+              bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500
+              text-white transition-colors"
+          >
+            <Sparkles className="w-3.5 h-3.5" />
+            Add with AI
           </button>
           <button
             type="button"
@@ -103,6 +116,13 @@ export default function PortfolioTab({ householdId = 'household_rakesh', onAsset
           householdId={householdId}
           onClose={() => setShowAddModal(false)}
           onSuccess={refresh}
+        />
+      )}
+
+      {showAddWithAI && (
+        <AddWithAI
+          onClose={() => setShowAddWithAI(false)}
+          onAdded={refresh}
         />
       )}
     </div>

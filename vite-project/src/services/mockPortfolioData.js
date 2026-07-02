@@ -1,8 +1,15 @@
 /**
  * useMockPortfolio — stub hook that returns realistic mock data
  * so the UI works without a live API.
+ *
+ * Assets added in this session (e.g. via "Add with AI") are merged in
+ * from portfolioAssetsStore so they appear immediately.
  */
+import { usePortfolioAssetsStore } from '../stores/portfolioAssetsStore';
+
 export function useMockPortfolio() {
+  const addedAssets = usePortfolioAssetsStore((s) => s.addedAssets);
+  const removedIds = usePortfolioAssetsStore((s) => s.removedIds);
   const summary = {
     total_invested: 785000,
     total_current_value: 1023750,
@@ -58,5 +65,20 @@ export function useMockPortfolio() {
     invested_amounts: Array(12).fill(785000),
   };
 
-  return { summary, assets, performance, loading: false, error: null };
+  // Merge session-added assets, drop session-deleted ones, adjust totals.
+  const kept = assets.filter((a) => !removedIds.includes(a.asset_id));
+  const allAssets = [...kept, ...addedAssets];
+  if (addedAssets.length > 0 || removedIds.length > 0) {
+    const removed = assets.filter((a) => removedIds.includes(a.asset_id));
+    summary.total_invested += addedAssets.reduce((s, a) => s + a.purchase_value, 0)
+      - removed.reduce((s, a) => s + a.purchase_value, 0);
+    summary.total_current_value += addedAssets.reduce((s, a) => s + a.current_value, 0)
+      - removed.reduce((s, a) => s + a.current_value, 0);
+    summary.total_gain_loss = summary.total_current_value - summary.total_invested;
+    summary.roi_percent = summary.total_invested > 0
+      ? (summary.total_gain_loss / summary.total_invested) * 100
+      : 0;
+  }
+
+  return { summary, assets: allAssets, performance, loading: false, error: null };
 }
